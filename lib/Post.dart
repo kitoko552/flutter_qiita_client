@@ -1,11 +1,12 @@
 class Post {
   final String title;
-  // final int likesCount;
-  // final DateTime updatedTime;
-  // final Uri url;
+  final int likesCount;
+  final String updatedTimeString;
+  final String urlString;
 
-  Post({this.title});
-  // Post({this.title, this.likesCount, this.updatedTime, this.url});
+  Post({this.title, this.likesCount, this.updatedTimeString, this.urlString});
+
+  DateTime get updatedTime => DateTime.parse(updatedTimeString);
 
   // TODO: abstract
   // Post(Map<String, dynamic> json)
@@ -13,12 +14,11 @@ class Post {
   //   super(json);
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    // print(json['title']);
     return new Post(
       title: json['title'],
-      // likesCount: json['likes_count'],
-      // updatedTime: json['updated_at'],
-      // url: json['url']
+      likesCount: json['likes_count'],
+      updatedTimeString: json['updated_at'],
+      urlString: json['url']
     );
   }
 }
