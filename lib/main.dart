@@ -30,11 +30,12 @@ class Home extends StatelessWidget {
           future: APIClient.fetch('https://qiita.com/api/v2/items?page=1&per_page=1&query=flutter'),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return new Text(snapshot.data.first?.urlString);
+              print('hasData');
+              return new Text(snapshot.data.first.user.id);
             } else if (snapshot.hasError) {
               return new Text("${snapshot.error}");
             } else {
-              return new Text('no data');
+              return new CircularProgressIndicator();
             }
           },
         ),
