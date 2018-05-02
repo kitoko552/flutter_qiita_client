@@ -25,21 +25,51 @@ class Home extends StatelessWidget {
       appBar: new AppBar(
         title: new Text('Qiita Client'),
       ),
-      body: new Center(
-        child: new FutureBuilder<List<Post>>(
-          future: APIClient.fetch('https://qiita.com/api/v2/items?page=1&per_page=1&query=flutter'),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              print('hasData');
-              return new Text(snapshot.data.first.user.id);
-            } else if (snapshot.hasError) {
-              return new Text("${snapshot.error}");
-            } else {
-              return new CircularProgressIndicator();
-            }
-          },
-        ),
+      body: new FutureBuilder<List<Post>>(
+        future: APIClient.fetch('https://qiita.com/api/v2/items?page=1&per_page=20&query=flutter'),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            print('hasData');
+            // return new Text(snapshot.data.first.user.id);
+            return new ListView(
+              children: snapshot.data.map((post) {
+                return new PostListItem(post);
+              }).toList(),
+            );
+          } else if (snapshot.hasError) {
+            return new Center(
+              child: new Text("${snapshot.error}"),
+            );
+          } else {
+            return new Center(
+              child: new CircularProgressIndicator(),
+            );
+          }
+        },
       ),
+    );
+  }
+}
+
+class PostListItem extends StatelessWidget {
+  final Post _post;
+
+  PostListItem(Post post)
+    : _post = post;
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListTile(
+      leading: ClipOval(
+        child: Image.network(
+          _post.user.profileImageUrl,
+          fit: BoxFit.cover,
+          // width: 90.0,
+          // height: 90.0,
+          ),
+      ),
+      title: Text(_post.title),
+
     );
   }
 }
