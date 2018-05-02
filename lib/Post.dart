@@ -32,7 +32,6 @@ class User {
   User({this.id, this.profileImageUrl});
 
   factory User.fromJson(Map<String, dynamic> json) {
-    print(json);
     return new User(
       id: json['id'],
       profileImageUrl: json['profile_image_url']

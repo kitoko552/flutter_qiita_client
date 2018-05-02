@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'Post.dart';
 import 'APIClient.dart';
@@ -29,12 +30,9 @@ class Home extends StatelessWidget {
         future: APIClient.fetch('https://qiita.com/api/v2/items?page=1&per_page=20&query=flutter'),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print('hasData');
-            // return new Text(snapshot.data.first.user.id);
             return new ListView(
-              children: snapshot.data.map((post) {
-                return new PostListItem(post);
-              }).toList(),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              children: snapshot.data.map((post) => new PostListItem(post)).toList(),
             );
           } else if (snapshot.hasError) {
             return new Center(
@@ -61,12 +59,17 @@ class PostListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return new ListTile(
       leading: ClipOval(
-        child: Image.network(
-          _post.user.profileImageUrl,
+        child: CachedNetworkImage(
+          // placeholder: new CircularProgressIndicator(),
+          imageUrl: _post.user.profileImageUrl,
           fit: BoxFit.cover,
-          // width: 90.0,
-          // height: 90.0,
-          ),
+        )
+        // child: Image.network(
+        //   _post.user.profileImageUrl,
+        //   fit: BoxFit.cover,
+        //   // width: 90.0,
+        //   // height: 90.0,
+        //   ),
       ),
       title: Text(_post.title),
 
