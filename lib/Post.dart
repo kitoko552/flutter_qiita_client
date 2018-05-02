@@ -13,6 +13,7 @@ class Post {
   //   super(json);
 
   factory Post.fromJson(Map<String, dynamic> json) {
+    // print(json['title']);
     return new Post(
       title: json['title'],
       // likesCount: json['likes_count'],
