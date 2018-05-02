@@ -15,9 +15,12 @@ class Home extends StatelessWidget {
         future: APIClient.fetch('https://qiita.com/api/v2/items?page=1&per_page=20&query=flutter'),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return new ListView(
+            return new ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              children: snapshot.data.map((post) => new PostListItem(post)).toList(),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return PostListItem(snapshot.data[index]);
+              },
             );
           } else if (snapshot.hasError) {
             return new Center(
