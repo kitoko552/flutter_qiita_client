@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 import 'Post.dart';
 import 'APIClient.dart';
@@ -65,7 +66,36 @@ class PostListItem extends StatelessWidget {
         )
       ),
       title: Text(_post.title),
+      onTap: () {
+        Navigator.of(context).push(
+          new MaterialPageRoute(
+            builder: (context) {
+              return new WebView(
+                url: _post.urlString,
+                title: _post.title
+              );
+            }
+          )
+        );
+      },
+    );
+  }
+}
 
+class WebView extends StatelessWidget {
+  final String _url;
+  final String _title;
+
+  WebView({String url, String title})
+    : _url = url, _title = title;
+
+  @override
+  Widget build(BuildContext context) {
+    return new WebviewScaffold(
+      url: _url,
+      appBar: new AppBar(
+        title: new Text(_title),
+      ),
     );
   }
 }
