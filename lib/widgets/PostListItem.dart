@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/Post.dart';
-import 'WebView.dart';
+// import 'WebView.dart';
 
 class PostListItem extends StatelessWidget {
   final Post _post;
@@ -21,17 +22,16 @@ class PostListItem extends StatelessWidget {
       ),
       title: Text(_post.title),
       onTap: () {
-        Navigator.of(context).push(
-          new MaterialPageRoute(
-            builder: (context) {
-              return new WebView(
-                url: _post.urlString,
-                title: _post.title
-              );
-            }
-          )
-        );
+        _launchURL(_post.urlString);
       },
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
