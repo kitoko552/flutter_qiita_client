@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'Post.dart';
+import 'models/Post.dart';
 
 class APIClient {
   static Future<List<Post>> fetch(String url) async {
