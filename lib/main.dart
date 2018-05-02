@@ -60,16 +60,9 @@ class PostListItem extends StatelessWidget {
     return new ListTile(
       leading: ClipOval(
         child: CachedNetworkImage(
-          // placeholder: new CircularProgressIndicator(),
           imageUrl: _post.user.profileImageUrl,
           fit: BoxFit.cover,
         )
-        // child: Image.network(
-        //   _post.user.profileImageUrl,
-        //   fit: BoxFit.cover,
-        //   // width: 90.0,
-        //   // height: 90.0,
-        //   ),
       ),
       title: Text(_post.title),
 
