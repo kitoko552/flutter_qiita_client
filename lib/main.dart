@@ -10,7 +10,7 @@ class App extends StatelessWidget {
     return new MaterialApp(
       title: 'Qiita Client',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: new Home(),
     );
