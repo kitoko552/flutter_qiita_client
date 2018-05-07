@@ -9,11 +9,6 @@ class Post {
 
   DateTime get updatedTime => DateTime.parse(updatedTimeString);
 
-  // TODO: abstract
-  // Post(Map<String, dynamic> json)
-  //   : title = json['title'],
-  //   super(json);
-
   factory Post.fromJson(Map<String, dynamic> json) {
     return new Post(
       title: json['title'],

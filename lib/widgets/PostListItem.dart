@@ -40,7 +40,6 @@ class PostListItem extends StatelessWidget {
         ),
       );
     } catch (e) {
-      // An exception is thrown if browser app is not installed on Android device.
       debugPrint(e.toString());
     }
   }
