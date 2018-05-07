@@ -12,22 +12,19 @@ class PostListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      height: 80.0,
-      child: new ListTile(
-        leading: new Container(
-          child: new ClipOval(
-            child: new CachedNetworkImage(
-              imageUrl: _post.user.profileImageUrl,
-              fit: BoxFit.cover,
-            )
+    return new ListTile(
+      leading: new Container(
+        child: new ClipOval(
+          child: new CachedNetworkImage(
+            imageUrl: _post.user.profileImageUrl,
+            fit: BoxFit.cover,
           )
-        ),
-        title: new Text(_post.title),
-        onTap: () {
-          _launchURL(_post.urlString, context);
-        },
+        )
       ),
+      title: new Text(_post.title),
+      onTap: () {
+        _launchURL(_post.urlString, context);
+      },
     );
   }
 
